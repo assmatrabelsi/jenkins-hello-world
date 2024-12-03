@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Cloner le dépôt') {
             steps {
-                git 'https://github.com/assmatrabelsi/jenkins-hello-world.git'
+                git branch: 'main', url: 'https://github.com/assmatrabelsi/jenkins-hello-world.git'
             }
         }
         stage('Exécuter mon code  Java') {
