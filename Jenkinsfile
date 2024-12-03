@@ -1,12 +1,26 @@
 pipeline {
     agent any
+    triggers {
+        pollSCM('* * * * *') // Vérification chaque minute
+    }
     stages {
-        stage('Build') {
+        stage('Cloner le dépôt') {
+            steps {
+                git ''https://github.com/assmatrabelsi/jenkins-hello-world.git
+            }
+        }
+        stage('Exécuter mon code  Java') {
             steps {
                 script {
-                    // Choisissez la commande en fonction de votre script
-                    sh 'python3 hello.py' // Pour Python
-                    // sh 'javac HelloWorld.java && java HelloWorld' // Pour Java
+                    sh 'javac HelloWorld.java'
+                    sh 'java HelloWorld'
+                }
+            }
+        }
+        stage('Exécuter mon code Python') {
+            steps {
+                script {
+                    sh 'python3 hello_world.py'
                 }
             }
         }
